@@ -30,12 +30,9 @@ namespace DictionaryChecker.Controllers
         [HttpPost]
         public async Task<IEnumerable<string>> Spellcheck([FromBody] string textToCheck)
         {
-            //Read dictionary
-            string dictionaryText = await reader.ReadDictionary();
-
 
             // Split dictionary and text into words (by line ending \n)
-            var dictionaryWords = dictionaryText.Replace("\r", "").Split("\n");
+            var dictionaryWords = await reader.ReadDictionary().Replace("\r", "").Split("\n");
             var wordsToCheck = textToCheck.Split(' ');
             
             // Iterate over all words in 
